@@ -1,0 +1,114 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<form id="edit_rol_form" method="post" action="{% url 'base:edit-rol' object.pk %}">
+    {% csrf_token %}
+    <div class="container-title">
+        <h1 class="h3 mb-3">Edit {{ object }}</h1>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="button" class="btn btn-primary" onclick="update_rol();">Save</button>
+        <a href="{% url 'base:roles' %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left">{{ form.name.label }}</p>
+                        <div class="col-sm-4">
+                            {{ form.name }}
+                        </div>
+                    </div>
+                    <ul class="nav nav-tabs" id="RolTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="user-tab" data-bs-toggle="tab" href="#user"
+                               role="tab" aria-controls="user" aria-selected="false">Users</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="access-tab" data-bs-toggle="tab" href="#access" role="tab"
+                               aria-controls="access" aria-selected="false">Access permission</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="user" role="tabpanel"
+                             aria-labelledby="user-tab">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a class="btn btn-outline-primary btn-sm"
+                                                   href="#">Add new element</a>
+                                            </div>
+                                            <div class="card-body">
+                                                <table id="users_rol_table" class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="cell100 column3">Name</th>
+                                                        <th class="cell100 column1" style="text-align: center">Users</th>
+                                                        <th class="cell100 column3" width="3%">Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="access" role="tabpanel" aria-labelledby="access-tab">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a class="btn btn-outline-primary btn-sm"
+                                                   href="#">Add new element</a>
+                                            </div>
+                                            <div class="card-body">
+                                                <table id="access_rol_table" class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th class="cell100 column3">Object</th>
+                                                        <th class="cell100 column1" style="text-align: center">Reading permit</th>
+                                                        <th class="cell100 column1" style="text-align: center">Writing permit</th>
+                                                        <th class="cell100 column1" style="text-align: center">Creating permit</th>
+                                                        <th class="cell100 column1" style="text-align: center">Deleting permit</th>
+                                                        <th class="cell100 column3" width="3%">Actions</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'settings/js/index.js'%}"></script>
+{% endblock extrajs %}

@@ -1,0 +1,22 @@
+<form id="delete_unit_form" method="post" action="{% url 'nerlax:delete-unit' object.pk %}">
+    {% csrf_token %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Delete Unit</h2>
+                <button type="button" class="btn-close"
+                    data-dismiss="modal"
+                    aria-label="Cancel"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-text">Are you sure you want to delete unit
+                    with title <strong>{{ object.name }}</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="delete_unit({{ object.pk }});">Delete</button>
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

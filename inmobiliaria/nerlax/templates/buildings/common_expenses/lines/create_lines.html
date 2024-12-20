@@ -1,0 +1,39 @@
+{% load static %}
+<form id="form_create_data" action="{% url 'nerlax:create-ce-lines' %}" method="post">
+    {% csrf_token %}
+    <div class="modal-dialog modal-mg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="expensesLinesModalLabel">Add Expenses</h2>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cancel"></button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group row">
+                    <p class="col-form-label col-sm-2 text-sm-right">{{ form.concept.label }}</p>
+                    <div class="col-sm-10">
+                        {{ form.concept }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <p class="col-form-label col-sm-2 text-sm-right">{{ form.amount.label }}</p>
+                    <div class="col-sm-10">
+                        {{ form.amount }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <p class="col-form-label col-sm-2 text-sm-right">{{ form.common_expenses.label }}</p>
+                    <div class="col-sm-10">
+                        {{ form.common_expenses }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button id="button_creation" type="button" class="btn btn-primary" onclick="add_ce_Lines();">Save
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

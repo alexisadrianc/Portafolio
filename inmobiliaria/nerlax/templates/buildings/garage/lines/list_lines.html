@@ -1,0 +1,71 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-title">
+    <h1 class="h3 mb-3">Garage</h1>
+</div>
+
+<div class="d-grid gap-2 d-md-block">
+    <a class="btn btn-primary"
+       href="#" onclick="addGarageLinesForm('/nerlax/create_garage_lines/')"
+    >
+        Create
+    </a>
+    <button type="button" class="btn btn-outline-secondary">
+        Import
+    </button>
+
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <table id="garage_lines_table" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th class="cell100 column3">Apartment</th>
+                        <th class="cell100 column1" style="text-align: center">Amount</th>
+                        <th class="cell100 column3" style="text-align: center">Is paid</th>
+                        <th class="cell100 column3" width="3%">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Wizard for create building -->
+<div class="modal fade" id="garageLinesModal" tabindex="-1"
+     aria-labelledby="garageModalLabel" aria-hidden="true">
+
+</div>
+
+<div class="modal fade" id="garageLinesModalEdit" tabindex="-1"
+     aria-labelledby="garageModalLabelEdit" aria-hidden="true">
+
+</div>
+
+<div class="modal fade" id="garageLinesModalDelete" tabindex="-1"
+     aria-labelledby="garageModalLabelDelete" aria-hidden="true">
+
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js"></script>
+<script src="{% static 'building/js/index.js'%}"></script>
+{% endblock extrajs %}

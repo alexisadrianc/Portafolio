@@ -1,0 +1,22 @@
+<form id="delete_property_form" method="post" action="{% url 'settings:delete-classification' object.pk %}">
+    {% csrf_token %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Delete property type</h2>
+                <button type="button" class="btn-close"
+                    data-dismiss="modal"
+                    aria-label="Cancel"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-text">Are you sure you want to delete property type with title <strong>
+                    {{ object }}</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="delete_classification({{ object.pk }});">Delete</button>
+                <button type="button" class="btn btn-secondary"
+                        data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

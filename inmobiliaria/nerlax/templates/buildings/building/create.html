@@ -1,0 +1,177 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<form id="form-create-building" method="post" action="{% url 'nerlax:create-building' %}" data-cities-url="{% url 'settings:load-cities' %}">
+    {% csrf_token %}
+    <div class="container-title">
+        <h1 class="h3 mb-3">Building</h1>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="submit" class="btn btn-primary">Save</button>
+        <a href="{% url 'nerlax:building' %}"
+           class="btn btn-outline-secondary">Cancel</a>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left">{{form.name.label}}</p>
+                        <div class="col-sm-10">
+                            {{form.name}}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left">{{ form.address.label}}</p>
+                        <div class="col-sm-10">
+                            {{ form.address }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left"></p>
+                        <div class="col-sm-10">
+                            {{ form.address2 }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left"></p>
+                        <div class="col-sm-5">
+                            {{ form.region }}
+                        </div>
+                        <div class="col-sm-5">
+                            {{ form.city }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left"></p>
+                        <div class="col-sm-5">
+                            {{ form.postal_code }}
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left">{{ form.unit_qty.label }}</p>
+                        <div class="col-sm-10">
+                            {{ form.unit_qty }}
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <p class="col-form-label col-sm-2 text-sm-left">{{ form.type_resource.label }}</p>
+                        <div class="col-sm-10">
+                            {{ form.type_resource }}
+                        </div>
+                    </div>
+                    <div class="form-group row form-switch">
+                        <p class="col-form-label col-sm-2 text-sm-left">{{ form.amenities.label }}</p>
+                        <div class="col-sm-10">
+                            <label>
+                                {{ form.amenities }}
+                            </label>
+                        </div>
+                    </div>
+
+                    <ul class="nav nav-tabs" id="BuildingTab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link active" id="supplier-tab"
+                               data-bs-toggle="tab"
+                               href="#supplier" role="tab" aria-controls="supplier"
+                               aria-selected="false">Supplier</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="amenities-tab"
+                               data-bs-toggle="tab"
+                               href="#amenities" role="tab"
+                               aria-controls="amenities"
+                               aria-selected="false">Amenities</a>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <a class="nav-link" id="description-tab"
+                               data-bs-toggle="tab"
+                               href="#description" role="tab"
+                               aria-controls="description"
+                               aria-selected="true">{{ form.description.label }}</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="myTabContent">
+                        <div class="tab-pane fade show active" id="supplier"
+                             role="tabpanel"
+                             aria-labelledby="supplier-tab">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <a class="btn btn-outline-primary btn-sm"
+                                                   href="#"
+                                                   onclick="addSupplier_form('{% url 'nerlax:list-msupplier' %}');">
+                                                    Add new element</a>
+                                            </div>
+                                            <div class="card-body">
+                                                <p>Click to add a new supplier.</p>
+                                                {{ form.supplier }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="amenities" role="tabpanel"
+                             aria-labelledby="amenities-tab">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-header">
+                                            </div>
+                                            <div class="card-body">
+                                                ...
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="description" role="tabpanel"
+                             aria-labelledby="description-tab">
+                            <br>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card">
+                                            <div class="card-body">
+                                                {{ form.description }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="addSupplier" tabindex="-1" aria-labelledby="addSupplierLabel" aria-hidden="true">
+
+</div>
+{% endblock content %}
+
+{% block extrajs %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js"></script>
+<script src="{% static 'building/js/index.js'%}"></script>
+{% endblock extrajs %}

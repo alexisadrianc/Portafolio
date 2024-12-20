@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'users/css/datatables.min.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container-title">
+    <h1 class="h3 mb-3">Company</h1>
+</div>
+
+<div class="d-grid gap-2 d-md-block">
+    <a href="{% url 'base:create-company' %}" class="btn btn-primary">
+        Create
+    </a>
+    <button type="button" class="btn btn-outline-secondary">
+        Import
+    </button>
+
+</div>
+<br/>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+
+            </div>
+            <div class="card-body">
+                <table id="table_companies" class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th class="cell100 column1" width="40%">Name</th>
+                        <th class="cell100 column4" width="20%">RUT</th>
+                        <th class="cell100 column4" width="35%">Address</th>
+                        <th class="cell100 column3">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!---->
+<div class="modal fade" id="companyDelete" tabindex="-1" aria-labelledby="companyDeleteLabel" aria-hidden="true">
+
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'users/js/index.js'%}"></script>
+{% endblock extrajs %}

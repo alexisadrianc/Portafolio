@@ -1,0 +1,345 @@
+<!--<div class="table100 ver5 m-b-110">-->
+<!--    <div class="table100-head">-->
+<!--        <table>-->
+<!--            <thead>-->
+<!--            <tr class="row100 head">-->
+<!--                <th class="cell100 column3">Name</th>-->
+<!--                <th class="cell100 column1">Address</th>-->
+<!--                <th class="cell100 column4">Amenities</th>-->
+<!--                <th class="cell100 column4">Quantity of Flat</th>-->
+<!--                <th class="cell100 column3">Options</th>-->
+<!--            </tr>-->
+<!--            </thead>-->
+<!--        </table>-->
+<!--    </div>-->
+
+<!--    <div class="table100-body js-pscroll">-->
+<!--        <table>-->
+<!--            <tbody>-->
+<!--            {% for item in buildings %}-->
+<!--            <tr class="row100 body">-->
+<!--                <td class="cell100 column3">{{item.name}}</td>-->
+<!--                <td class="cell100 column1">{{item.address}}</td>-->
+<!--                <td class="cell100 column4" align="center">{{item.amenities}}-->
+<!--                </td>-->
+<!--                <td class="cell100 column4" align="center">{{item.unit_qty}}-->
+<!--                </td>-->
+<!--                <td class="cell100 column3">-->
+<!--                    <button type="submit" id="b-edit"-->
+<!--                            class="btn-sm btn-primary"-->
+<!--                            onclick="edit_form('{% url 'nerlax:update-building' item.pk %}')">-->
+<!--                        <span class="icon-edit mr-3"></span>-->
+<!--                    </button>-->
+<!--                    <button type="submit" class="btn-sm btn-danger"-->
+<!--                            id="b-delete"-->
+<!--                            onclick="delete_form('{% url 'nerlax:delete-building' item.pk %}')">-->
+<!--                        <span class="icon-delete mr-3"></span>-->
+<!--                    </button>-->
+<!--                </td>-->
+<!--            </tr>-->
+<!--            {% empty %}-->
+<!--            <tr>-->
+<!--                <td colspan="6" class="text-center bg-warning">No building</td>-->
+<!--            </tr>-->
+<!--            {% endfor %}-->
+<!--            </tbody>-->
+<!--        </table>-->
+<!--        &lt;!&ndash;Page navigation &ndash;&gt;-->
+<!--        {% if buildings.has_next or buildings.has_previous %}-->
+<!--        <nav aria-label="Page navigation">-->
+
+<!--            <ul class="pagination justify-content-end">-->
+<!--                {% if buildings.has_previous %}-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link"-->
+<!--                       href="?page={{ buildings.previous_page_number }}"-->
+<!--                       aria-label="Previous">-->
+<!--                        <span aria-hidden="true">&laquo;</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--                {% for page in buildings.paginator.page_range %}-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link"-->
+<!--                       href="?page={{ page }}">{{ page }}</a></li>-->
+<!--                {% endfor %}-->
+
+<!--                {% if buildings.has_next %}-->
+<!--                <li class="page-item">-->
+<!--                    <a class="page-link"-->
+<!--                       href="?page={{ buildings.next_page_number }}"-->
+<!--                       aria-label="Next">-->
+<!--                        <span aria-hidden="true">&raquo;</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+<!--                {% endif %}-->
+<!--            </ul>-->
+
+<!--        </nav>-->
+<!--        {% endif %}-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div class="modal-dialog modal-lg" role="document">-->
+<!--    <div class="modal-content">-->
+<!--        <div class="modal-header">-->
+<!--            <h2 class="modal-title" id="unitModalLabel">Edit Apartment</h2>-->
+<!--            <button type="button" class="btn-close"-->
+<!--                    data-dismiss="modal"-->
+<!--                    aria-label="Cancel"></button>-->
+<!--        </div>-->
+
+<!--        <form method="post" action="">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="modal-body">-->
+<!--                <div class="item">-->
+<!--                    <p>{{ form.init_date.label }}</p>-->
+<!--                    {{ form.init_date }}-->
+<!--                    <i class="fas fa-calendar-alt"></i>-->
+<!--                </div>-->
+<!--                <div class="item">-->
+<!--                    <p>{{ form.name.label }}</p>-->
+<!--                    {{ form.name }}-->
+<!--                </div>-->
+<!--                <div class="item">-->
+<!--                    <p>{{ form.number.label }}</p>-->
+<!--                    {{ form.flat }} <span> - </span>-->
+<!--                    {{ form.number }}-->
+<!--                </div>-->
+<!--                <div class="item location">-->
+<!--                    <p>{{ form.meter_qty.label }}</p>-->
+<!--                    {{ form.meter_qty }}-->
+<!--                </div>-->
+<!--                <div class="item">-->
+<!--                    <p>{{ form.rent_price.label }}</p>-->
+<!--                    {{ form.rent_price }}-->
+<!--                </div>-->
+
+<!--                <div class="item">-->
+<!--                    <p>{{ form.renovation_date.label }}</p>-->
+<!--                    {{ form.renovation_date }}-->
+<!--                </div>-->
+<!--                <div class="item">-->
+<!--                    <p>{{ form.expiration_date.label }}</p>-->
+<!--                    {{ form.expiration_date }}-->
+<!--                </div>-->
+<!--                <div class="item">-->
+<!--                    <p>{{ form.renter.label }}</p>-->
+<!--                    <div class="street">-->
+<!--                        {{ form.renter }}-->
+<!--                    </div>-->
+
+<!--                </div>-->
+<!--                <div class="item desired-outcome">-->
+<!--                    <p>{{ form.description.label }}</p>-->
+<!--                    <div class="desired-outcome-item">-->
+<!--                        {{ form.description }}-->
+<!--                        <small>By signing you declare that all information-->
+<!--                            you-->
+<!--                            have entered is truthful and accurate.</small>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+
+<!--            <div class="modal-footer">-->
+<!--                <button type="submit" class="btn btn-primary">Save</button>-->
+<!--                <button type="button" class="btn btn-secondary"-->
+<!--                        data-dismiss="modal">Cancel-->
+<!--                </button>-->
+<!--            </div>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--{% if is_paginated %}
+            <nav aria-label="Page navigation">
+
+                <ul class="pagination justify-content-end">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for page in paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == page %} active {% endif %}">
+                        <a class="page-link"
+                           href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+            </nav>
+            {% endif %}-->
+
+
+<!--{% extends 'home.html' %}
+
+{% block content %}
+<div class="container-title">
+    <h1 class="h3 mb-3">Apartment</h1>
+    <form class="form-inline d-flex justify-content-center md-form form-sm">
+        <input type="text"
+               class="form-control bg-light border-0 small"
+               placeholder="Search for..." aria-label="Search"
+               aria-describedby="basic-addon2">
+        <div class="input-group-append">
+            <button class="btn btn-primary" type="button">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                     height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round"
+                     class="feather feather-search align-middle">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65"
+                          y2="16.65"></line>
+                </svg>
+            </button>
+        </div>
+    </form>
+</div>
+
+<div class="d-grid gap-2 d-md-block">
+    <a class="btn btn-primary" type="button"
+       href="{% url 'nerlax:create-unit' %}">
+        Create
+    </a>
+    <button type="button" class="btn btn-outline-secondary">
+        Import
+    </button>
+
+</div>
+<br/>
+<div class="container">
+    <div class="row">
+        <div class="card">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="cell100 column2">Name</th>
+                    <th class="cell100 column1">Building</th>
+                    <th class="cell100 column2" style="text-align: center">m2</th>
+                    <th class="cell100 column1">Renter</th>
+                    <th class="cell100 column3" style="text-align: center">Contract start date</th>
+                    <th class="cell100 column3" style="text-align: center">Contract expiration date</th>
+                    <th class="cell100 column3" width="3%">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in units %}
+                <tr class="row100 body">
+                    <td class="cell100 column2">{{ item.name }}</td>
+                    <td class="cell100 column2">{{ item.building_id }}</td>
+                    <td class="cell100 column2" align="center">
+                        {{ item.meter_qty }}
+                    </td>
+                    <td class="cell100 column1">
+                        {{item.renter.first_name|add:" "|add:item.renter.last_name }}
+                    </td>
+                    <td class="cell100 column3" align="center">
+                        {{ item.init_date }}
+                    </td>
+                    <td class="cell100 column3" align="center">
+                        {{ item.expiration_date }}
+                    </td>
+                    <td class="table-action">
+                        <a href="{% url 'nerlax:update-unit' item.pk %}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="feather feather-edit-2 align-middle">
+                                <path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path>
+                            </svg>
+                        </a>
+                        <a href="javascript:delete_unit_form('{% url 'nerlax:delete-unit' item.pk %}')">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24"
+                                 height="24"
+                                 viewBox="0 0 24 24" fill="none"
+                                 stroke="currentColor"
+                                 stroke-width="2" stroke-linecap="round"
+                                 stroke-linejoin="round"
+                                 class="feather feather-trash align-middle">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="7" class="text-center bg-warning">No units
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            {% if is_paginated %}
+            <nav aria-label="Page navigation">
+
+                <ul class="pagination justify-content-end">
+                    {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.previous_page_number }}"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                    {% for page in paginator.page_range %}
+                    <li class="page-item {% if page_obj.number == page %} active {% endif %}">
+                        <a class="page-link"
+                           href="?page={{ page }}">{{ page }}</a></li>
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link"
+                           href="?page={{ page_obj.next_page_number }}"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+
+            </nav>
+            {% endif %}
+        </div>
+    </div>
+</div>-->
+<!--Wizard for create building -->
+<!--<div class="modal fade" id="unitModalDelete" tabindex="-1"-->
+<!--     aria-labelledby="unitModalDeleteLabel" aria-hidden="true">-->
+
+<!--</div>-->
+
+<!--{% endblock content %}-->
+
+<!--{% block extrajs %}-->
+<!--<script type="text/javascript">-->
+<!--    var $ = jQuery.noConflict()-->
+<!--    function delete_unit_form(url){-->
+<!--        $('#unitModalDelete').load(url, function(){-->
+<!--            $(this).modal('show');-->
+<!--        });-->
+<!--    }-->
+
+
+<!--</script>-->
+<!--{% endblock extrajs %}-->

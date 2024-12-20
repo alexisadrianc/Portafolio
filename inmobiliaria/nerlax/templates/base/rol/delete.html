@@ -1,0 +1,19 @@
+<form id="delete-rol-form" method="post" action="{% url 'base:delete-rol' object.pk %}">
+    {% csrf_token %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Delete rol</h2>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Cancel"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-text">Are you sure you want to delete rol with title <strong>
+                    {{ object }}</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="delete_rol({{ object.pk }});">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>

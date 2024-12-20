@@ -1,0 +1,54 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3">Property type</h1>
+    <div class="d-grid gap-2 d-md-block">
+        <a href="{% url 'settings:create-classification' %}"
+           class="btn btn-primary">
+            Create
+        </a>
+        <a href="{% url 'settings:import-classification' %}" class="btn btn-outline-secondary">
+            Import
+        </a>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <table id="classification_table" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="cell100 column1" width="96%">Name</th>
+                            <th class="cell100 column3">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!---->
+    <div class="modal fade" id="classificationDelete" tabindex="-1"
+         aria-labelledby="classificationDeleteLabel" aria-hidden="true">
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'settings/js/index.js'%}"></script>
+{% endblock extrajs %}

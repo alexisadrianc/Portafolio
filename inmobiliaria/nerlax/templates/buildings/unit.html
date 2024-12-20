@@ -1,0 +1,59 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'users/css/datatables.min.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3">Apartment</h1>
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" type="button"
+           href="{% url 'nerlax:create-unit' %}">
+            Create
+        </a>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <table id="unit_table" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="cell100 column2">Name</th>
+                            <th class="cell100 column1">Building</th>
+                            <th class="cell100 column2" style="text-align: center">m2</th>
+                            <th class="cell100 column2" style="text-align: center">Has it garage ?</th>
+                            <th class="cell100 column1">Renter</th>
+                            <th class="cell100 column3" style="text-align: center">Contract start date</th>
+                            <th class="cell100 column3" width="3%">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!--Wizard for create building -->
+    <div class="modal fade" id="unitModalDelete" tabindex="-1"
+         aria-labelledby="unitModalDeleteLabel" aria-hidden="true">
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'building/js/index.js'%}"></script>
+{% endblock extrajs %}

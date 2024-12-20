@@ -1,0 +1,84 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<form id="edit_company_form" method="post" enctype="multipart/form-data" action="{% url 'base:edit-company' object.pk %}">
+    {% csrf_token %}
+    <div class="container-title">
+        <h1 class="h3 mb-3">Edit {{ object }}</h1>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="button" class="btn btn-primary" onclick="update_company();">Save</button>
+        <a href="{% url 'base:companies' %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+
+                    <div class="form-group">
+                        <img class="img-fluid rounded-circle mb-2" width="128" height="128"
+                                 src={% if form.instance.image %} "{{ form.instance.image.url }}" {% else %} "http://ssl.gstatic.com/accounts/ui/avatar_2x.png" {% endif %}/>
+                           {{ form.image }}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <p>{{ form.name.label }}</p>
+                            {{ form.name }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p>{{ form.rut_dgi.label }}</p>
+                            {{ form.rut_dgi }}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p>{{ form.address.label }}</p>
+                        {{ form.address }}
+                    </div>
+                    <div class="form-group">
+                        <p>{{ form.address2.label }}</p>
+                        {{ form.address2 }}
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <p>{{ form.region.label }}</p>
+                            {{ form.region }}
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="inputState">State</label>
+                            <select id="inputState" class="form-control">
+                                <option selected="">Choose...</option>
+                                <option>...</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <p>{{ form.postal_code.label }}</p>
+                            {{ form.postal_code }}
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <p>{{ form.email.label }}</p>
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group col-md-6">
+                            <p>{{ form.mobile.label }}</p>
+                            {{ form.mobile }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'users/js/index.js'%}"></script>
+{% endblock extrajs %}

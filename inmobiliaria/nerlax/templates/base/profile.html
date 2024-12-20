@@ -1,0 +1,146 @@
+{% extends 'home.html' %}
+
+{% load static %}
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="container-fluid">
+        <h1 class="h3 mb-3">Profile </h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- left column -->
+            <div class="col-md-4 col-xl-3">
+                <div class="card mb-3">
+                    <div class="card-body text-center">
+                        <div class="cardheader"></div>
+                        <div class="text-center">
+                            <img class="avatar img-circle img-thumbnail" alt="avatar" width="75%"
+                                 src={% if form.instance.image %} "{{ form.instance.image.url }}" {% else %} "http://ssl.gstatic.com/accounts/ui/avatar_2x.png" {% endif %}/>
+                            <div class="mt-2">
+                                {{ form.image }}
+                            </div>
+<!--                            <img src="http://ssl.gstatic.com/accounts/ui/avatar_2x.png"-->
+<!--                                 class="avatar img-circle img-thumbnail"-->
+<!--                                 alt="avatar">-->
+<!--                            <h4>Upload a different photo...</h4>-->
+<!--                            <div class="mt-2">-->
+<!--                                <span class="btn btn-primary">-->
+<!--                                    <svg xmlns="http://www.w3.org/2000/svg"-->
+<!--                                         xmlns:xlink="http://www.w3.org/1999/xlink"-->
+<!--                                         aria-hidden="true" focusable="false" width="1em"-->
+<!--                                         height="1em"-->
+<!--                                         style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"-->
+<!--                                         preserveAspectRatio="xMidYMid meet"-->
+<!--                                         viewBox="0 0 24 24"><g fill="none" stroke="white"-->
+<!--                                                                stroke-width="2"-->
+<!--                                                                stroke-linecap="round"-->
+<!--                                                                stroke-linejoin="round"><path-->
+<!--                                            d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path-->
+<!--                                            d="M17 8l-5-5l-5 5"/><path-->
+<!--                                            d="M12 3v12"/></g></svg> Upload</span>-->
+<!--                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- edit form column -->
+            <div class="col-md-8 col-xl-9">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-actions float-right">
+                        <div class="dropdown show">
+                            <a href="#" data-toggle="dropdown"
+                               data-display="static">
+                                <svg xmlns="http://www.w3.org/2000/svg"
+                                     width="24" height="24" viewBox="0 0 24 24"
+                                     fill="none" stroke="currentColor"
+                                     stroke-width="2" stroke-linecap="round"
+                                     stroke-linejoin="round"
+                                     class="feather feather-more-horizontal align-middle">
+                                    <circle cx="12" cy="12" r="1"></circle>
+                                    <circle cx="19" cy="12" r="1"></circle>
+                                    <circle cx="5" cy="12" r="1"></circle>
+                                </svg>
+                            </a>
+
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#" onclick="changePasswordModalForm();">Change Password</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <p>{{ form.first_name.label }}</p>
+                                {{ form.first_name }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <p>{{ form.last_name.label }}</p>
+                                {{ form.last_name }}
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <p>{{ form.email.label }}</p>
+                            {{ form.email }}
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <p>{{ form.username.label }}</p>
+                                {{ form.username }}
+                            </div>
+                            <div class="form-group col-md-6">
+                                <p>{{ form.user_type.label }}</p>
+                                {{ form.user_type }}
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label class="col-md-3 control-label"></label>
+                            <div class="form-group col-md-3">
+                                <input class="btn btn-primary" value="Save Changes" type="button">
+                            </div>
+                            <div class="form-group col-md-2">
+                                <a href="{% url 'home' %}" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="modal fade" id="changePasswordModal" tabindex="-1"
+     aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+
+</div>
+{% endblock content %}
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'users/js/index.js'%}"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    var readURL = function(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('.avatar').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $(".file-upload").on('change', function(){
+        readURL(this);
+    });
+});
+
+
+</script>
+{% endblock extrajs %}

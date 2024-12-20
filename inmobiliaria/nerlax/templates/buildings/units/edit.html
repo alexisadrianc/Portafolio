@@ -1,0 +1,205 @@
+{% extends 'home.html' %}
+
+{% load static %}
+
+{% block content %}
+<form id="edit_unit_form" method="post" action="{% url 'nerlax:update-unit' object.pk %}">
+    {% csrf_token %}
+    <div class="container-title">
+        <h1 class="h3 mb-3">Edit </h1>
+    </div>
+    <div class="d-grid gap-2 d-md-block">
+        <button type="button" class="btn btn-primary" onclick="edit_unit();">Save</button>
+        <a href="{% url 'nerlax:unit' %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+    <br/>
+    <div class="container">
+        <div class="row">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="card-title mb-0">{{ object }}</h3>
+                </div>
+                <div class="card-body">
+                    <div class="col-sm-12">
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-3 text-sm-left">{{ form.number.label }}</p>
+                            <div class="col-sm-5">
+                                {{ form.flat }}
+                            </div>
+                            <div class="col-sm-4">
+                                {{ form.number }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-3 text-sm-left">{{ form.building_id.label }}</p>
+                            <div class="col-sm-9">
+                                {{ form.building_id }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-3 text-sm-left">{{ form.renter.label }}</p>
+                            <div class="col-sm-9">
+                                {{ form.renter }}
+                            </div>
+
+                        </div>
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-3 text-sm-left">{{ form.rent_price.label }}</p>
+                            <div class="col-sm-9">
+                                {{ form.rent_price }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-3 text-sm-left">{{ form.init_date.label }}</p>
+                            <div class="col-sm-9">
+                                <div class="input-group date" id="init_date-time" data-target-input="nearest">
+                                    {{ form.init_date }}
+                                    <div class="input-group-append" data-target="#init_date-time"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 aria-hidden="true" focusable="false" width="15" height="15"
+                                                 style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                                <g fill="none" stroke="#626262" stroke-width="2" stroke-linecap="round"
+                                                   stroke-linejoin="round">
+                                                    <rect x="3" y="4" width="18" height="18" rx="2"
+                                                          ry="2"/>
+                                                    <path d="M16 2v4"/>
+                                                    <path d="M8 2v4"/>
+                                                    <path d="M3 10h18"/>
+                                                </g>
+                                                <rect x="0" y="0" width="24" height="24"
+                                                      fill="rgba(0, 0, 0, 0)"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-6 text-sm-left">{{ form.renovation_date.label }}</p>
+                            <div class="col-sm-6">
+                                <div class="input-group date" id="renovation_date-time" data-target-input="nearest">
+                                    {{ form.renovation_date }}
+                                    <div class="input-group-append" data-target="#renovation_date-time"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 aria-hidden="true" focusable="false" width="15" height="15"
+                                                 style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                                <g fill="none" stroke="#626262" stroke-width="2" stroke-linecap="round"
+                                                   stroke-linejoin="round">
+                                                    <rect x="3" y="4" width="18" height="18" rx="2"
+                                                          ry="2"/>
+                                                    <path d="M16 2v4"/>
+                                                    <path d="M8 2v4"/>
+                                                    <path d="M3 10h18"/>
+                                                </g>
+                                                <rect x="0" y="0" width="24" height="24"
+                                                      fill="rgba(0, 0, 0, 0)"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-5 text-sm-left">{{ form.expiration_date.label }}</p>
+                            <div class="col-sm-7">
+                                <div class="input-group date" id="expiration_date-time" data-target-input="nearest">
+                                    {{ form.expiration_date }}
+                                    <div class="input-group-append" data-target="#expiration_date-time"
+                                         data-toggle="datetimepicker">
+                                        <div class="input-group-text">
+                                            <svg xmlns="http://www.w3.org/2000/svg"
+                                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                 aria-hidden="true" focusable="false" width="15" height="15"
+                                                 style="-ms-transform: rotate(360deg); -webkit-transform: rotate(360deg); transform: rotate(360deg);"
+                                                 preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                                                <g fill="none" stroke="#626262" stroke-width="2" stroke-linecap="round"
+                                                   stroke-linejoin="round">
+                                                    <rect x="3" y="4" width="18" height="18" rx="2"
+                                                          ry="2"/>
+                                                    <path d="M16 2v4"/>
+                                                    <path d="M8 2v4"/>
+                                                    <path d="M3 10h18"/>
+                                                </g>
+                                                <rect x="0" y="0" width="24" height="24"
+                                                      fill="rgba(0, 0, 0, 0)"/>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-6 text-sm-left">{{ form.meter_qty.label }}</p>
+                            <div class="col-sm-6">
+                                {{ form.meter_qty }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 form-check form-switch">
+                        <div class="form-group row">
+                            <p class="col-form-label col-sm-6 text-sm-left">{{ form.garage.label }}</p>
+                            <div class="col-sm-6">
+                                {{ form.garage }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row col-sm-12">
+                        <ul class="nav nav-tabs" id="UnitTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a class="nav-link active" id="description-tab"
+                                   data-bs-toggle="tab"
+                                   href="#description" role="tab"
+                                   aria-controls="description"
+                                   aria-selected="false">{{ form.description.label }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="description" role="tabpanel"
+                                 aria-labelledby="description-tab">
+                                <br>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    {{ form.description }}
+                                                    <small>By signing you declare that all information you have entered
+                                                        is truthful and
+                                                        accurate.</small>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+{% endblock content %}
+
+{% block extrajs %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+<script type="text/javascript"
+        src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.23/b-1.6.5/b-html5-1.6.5/b-print-1.6.5/datatables.min.js"></script>
+<script src="{% static 'building/js/index.js'%}"></script>
+{% endblock extrajs %}

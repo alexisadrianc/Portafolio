@@ -1,0 +1,58 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'users/css/datatables.min.css' %}">
+{% endblock extra_css %}
+
+{% block content %}
+<div class="container-fluid p-0">
+    <h1 class="h3 mb-3">Building</h1>
+    <div class="d-grid gap-2 d-md-block">
+        <a class="btn btn-primary" href="{% url 'nerlax:create-building' %}">
+            Create
+        </a>
+    </div>
+    <br/>
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+
+                </div>
+                <div class="card-body">
+                    <table id="building_table" class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th class="cell100 column3">Name</th>
+                            <th class="cell100 column1">Address</th>
+                            <th class="cell100 column4" style="text-align: center; vertical-align: middle;">Amenities
+                            </th>
+                            <th class="cell100 column4" style="text-align: center; vertical-align: middle;">Quantity of
+                                Flat
+                            </th>
+                            <th class="cell100 column3" width="3%">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Wizard for create building -->
+    <div class="modal fade" id="buildingModalDelete" tabindex="-1"
+         aria-labelledby="buildingModalDeleteLabel" aria-hidden="true">
+
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block extrajs %}
+<script src="{% static 'users/js/datatables.js' %}"></script>
+<script src="{% static 'users/js/datatables.min.js' %}"></script>
+<script src="{% static 'building/js/index.js'%}"></script>
+{% endblock extrajs %}

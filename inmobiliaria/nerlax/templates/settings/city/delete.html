@@ -1,0 +1,21 @@
+<form id="delete_city_form" method="post" action="{% url 'settings:delete-city' object.pk %}">
+    {% csrf_token %}
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Delete City</h2>
+                <button type="button" class="btn-close"
+                    data-dismiss="modal"
+                    aria-label="Cancel"></button>
+            </div>
+            <div class="modal-body">
+                <p class="delete-text">Are you sure you want to delete city with title <strong>
+                    {{ object }}</strong>?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="delete_city({{ object.pk }});">Delete</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</form>
